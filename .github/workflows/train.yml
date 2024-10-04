@@ -26,6 +26,12 @@ jobs:
       - name: Train model
         run: python train.py
 
+      - name: Checking the docker version
+        run: docker --version
+
+      - name: checking azure is here
+        run: az
+
       - name: Upload model artifact
         uses: actions/upload-artifact@v3
         with:
