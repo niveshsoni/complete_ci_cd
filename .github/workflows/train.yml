@@ -3,7 +3,7 @@ name: Train Model
 on:
   pull_request:
     branches:
-      - main
+      - development
 
 jobs:
   train-model:
