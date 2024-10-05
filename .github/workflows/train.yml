@@ -38,4 +38,4 @@ jobs:
           name: logistic_regression_model
           path: logistic_regression_model.pkl
 
-# added filess
+# checked if azure is installed or not
