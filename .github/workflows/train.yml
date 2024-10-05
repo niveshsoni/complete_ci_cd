@@ -36,6 +36,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: logistic_regression_model
-          path: logistic_regression_model.pkl
+        #   path: logistic_regression_model.pkl
 
 # checked if azure is installed or not

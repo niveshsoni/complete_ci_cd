@@ -7,7 +7,7 @@ import pandas as pd
 app = FastAPI()
 
 # Load the pre-trained model
-model = joblib.load('logistic_regression_model.pkl')
+model = joblib.load('deployment/logistic_regression_model.pkl')
 
 # Define the request body structure
 class IrisData(BaseModel):

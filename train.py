@@ -35,7 +35,7 @@ def train_model():
     print(f"Model Accuracy: {accuracy * 100:.2f}%")
 
     # Save the model to a file
-    joblib.dump(model, 'logistic_regression_model.pkl')
+    joblib.dump(model, 'deployment/logistic_regression_model.pkl')
     print("Model saved as logistic_regression_model.pkl")
 
 if __name__ == "__main__":
