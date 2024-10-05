@@ -33,7 +33,7 @@ jobs:
       # Step 4: Navigate to the app folder and build the Docker image
       - name: Build Docker image
         run: |
-          cd app_folder  # Replace 'app_folder' with your actual folder name
+          cd deployment  # Replace 'app_folder' with your actual folder name
           docker build -t fastapi-iris-app:latest .
 
       # Step 5: Log in to Azure Container Registry (ACR)
