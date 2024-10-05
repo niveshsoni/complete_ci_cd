@@ -19,7 +19,7 @@ jobs:
       - name: Download trained model artifact
         uses: actions/download-artifact@v3
         with:
-          name: logistic_regression_model  # This is the artifact name used in the first workflow
+          name: deployment-folder  # This is the artifact name used in the first workflow
           run-id: 11191258499
 
       # Step 3: Log in to Azure CLI
