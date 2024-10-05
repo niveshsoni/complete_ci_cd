@@ -1,0 +1,52 @@
+name: Build and Push Docker Image to ACR
+
+on:
+  workflow_run:
+    workflows: ["Train Model"]  # Name of the first workflow (train.yml)
+    types:
+      - completed
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code from your repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Download artifacts from "Train Model Workflow"
+      - name: Download trained model artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: logistic_regression_model  # This is the artifact name used in the first workflow
+          run-id: 11191258499
+
+      # Step 3: Log in to Azure CLI
+      - name: Log in to Azure
+        run: az login
+
+      - name: checking the path
+        run: cd deployment | ls
+
+
+      # Step 4: Navigate to the app folder and build the Docker image
+      - name: Build Docker image
+        run: |
+          cd app_folder  # Replace 'app_folder' with your actual folder name
+          docker build -t fastapi-iris-app:latest .
+
+      # Step 5: Log in to Azure Container Registry (ACR)
+      - name: Log in to ACR
+        run: |
+          az acr login --name ${{ secrets.ACR_NAME }}
+
+      # Step 6: Tag the Docker image for ACR
+      - name: Tag Docker image for ACR
+        run: |
+          docker tag fastapi-iris-app:latest ${{ secrets.ACR_NAME }}.azurecr.io/fastapi-iris-app:latest
+
+      # Step 7: Push the Docker image to ACR
+      - name: Push Docker image to ACR
+        run: |
+          docker push ${{ secrets.ACR_NAME }}.azurecr.io/fastapi-iris-app:latest
